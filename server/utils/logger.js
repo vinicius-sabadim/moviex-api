@@ -9,7 +9,7 @@ const logger = {
   log: function() {
     const tag = '✏️  LOG -'.white
     const args = _.toArray(arguments)
-      .map(function(arg) {
+      .map((arg = {}) => {
         if (typeof arg === 'object') {
           const string = JSON.stringify(arg, null, 2)
           return `${ tag } ${ string.cyan }`
@@ -22,7 +22,7 @@ const logger = {
 
   error: function() {
     const args = _.toArray(arguments)
-      .map(function(arg) {
+      .map((arg) => {
         arg = arg.stack || arg
         const name = arg.name || '❌ ERROR -'
         const log = `${ name.white } ${ arg.red }`

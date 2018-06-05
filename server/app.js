@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+require('./middleware/appMiddleware')(app)
+
 const api = require('./api')
 
 app.use('/api', api)
