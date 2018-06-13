@@ -4,28 +4,30 @@ This is a project for me to learn more and practice my skills using `Node.js`.
 
 ### Endpoints
 
-At the moment, the project has two ways to interact: Rest and GraphQL.
+At the moment the project has two ways to interact: `Rest` and `GraphQL`.
 
 #### Rest
 
 - `/api/movies`
-  * GET
+  
+  GET
   ```bash
   http localhost:3000/api/movies
   ```
 
-  * POST
+  POST
   ```bash
   http post localhost:3000/api/movies <<< '{ "title": "It", "genre": "Horror" }'
   ```
 
 - `/api/movies/:id`
-  * GET
+
+  GET
   ```bash
   http localhost:3000/api/movies/1
   ```
 
-  * PUT
+  PUT
   ```bash
   http put localhost:3000/api/movies/1 <<< '{ "title": "Friday 13th" }' 
   ```
@@ -38,7 +40,8 @@ At the moment, the project has two ways to interact: Rest and GraphQL.
 #### GraphQL
 
 - Query
-  * Get a single movie.
+  
+  Get a single movie.
   ```bash
   query getSingleMovie($id: Int!) {
     movie(id: $id) {
@@ -52,7 +55,7 @@ At the moment, the project has two ways to interact: Rest and GraphQL.
   }
   ```
 
-  * Get all movies.
+  Get all movies.
   ```bash
   query getAllMovies {
     movies {
@@ -62,7 +65,7 @@ At the moment, the project has two ways to interact: Rest and GraphQL.
   }
   ```
 
-  * Get all movies using filter.
+  Get all movies using filter.
   ```bash
   query getAllMovies($genre: String) {
     movies(genre: $genre) {
@@ -75,3 +78,7 @@ At the moment, the project has two ways to interact: Rest and GraphQL.
     "genre": "Horror" 
   }
   ```
+
+- Mutation
+
+  Soon...
