@@ -1,8 +1,7 @@
 const _ = require('lodash')
 
 const logger = require('../../utils/logger')
-let movies = require('./movieModel')
-let id = 1
+const { addMovie, movies } = require('../../data/movies')
 
 exports.param = (req, res, next, id) => {
   const movie = movies.find((movie) => movie.id === parseInt(id, 10))
@@ -19,11 +18,7 @@ exports.get = (req, res) => {
 }
 
 exports.post = (req, res) => {
-  const movie = { ...req.body, id }
-  movies.push(movie)
-  id = id + 1
-
-  res.json(movie)
+  res.json(addMovie(req.body))
 }
 
 exports.getOne = (req, res) => {
