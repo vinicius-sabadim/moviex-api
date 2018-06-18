@@ -8,6 +8,8 @@ At the moment the project has two ways to interact: `Rest` and `GraphQL`.
 
 #### Rest
 
+We will use a tool called [HTTPie](https://httpie.org/) to help us to run the api calls.
+
 - `/api/movies`
   
   GET
@@ -32,7 +34,7 @@ At the moment the project has two ways to interact: `Rest` and `GraphQL`.
   http put localhost:3000/api/movies/1 <<< '{ "title": "Friday 13th" }' 
   ```
 
-  * DELETE
+  DELETE
   ```bash
   http delete localhost:3000/api/movies/1
   ```
