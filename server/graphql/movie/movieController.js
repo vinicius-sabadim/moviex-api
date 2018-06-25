@@ -1,17 +1,15 @@
-const { movies } = require('../../data/movies')
+const Movie = require('../../models/movie')
 
 const getMovie = (args) => {
   const { id } = args
-  const movie = movies.filter((movie) => movie.id === id)
-  return movie.length > 0 ? movie[0] : []
+  return Movie.findById(id).then((movie) => movie)
 }
 
 const getMovies = (args) => {
-  if (args.genre) {
-    const { genre } = args
-    return movies.filter((movie) => movie.genre === genre)
-  }
-  return movies
+  let filter = {}
+  if (args.genre) filter = Object.assign(filter, { genre: args.genre })
+
+  return Movie.find(filter).then((movies) => movies)
 }
 
 module.exports = {

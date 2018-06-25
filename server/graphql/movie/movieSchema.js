@@ -2,11 +2,11 @@ const { buildSchema } = require('graphql')
 
 const schema = buildSchema(`
   type Query {
-    movie(id: Int!): Movie
+    movie(id: String!): Movie
     movies(genre: String): [Movie]
   },
   type Movie {
-    id: Int
+    id: String
     title: String
     genre: String
   }

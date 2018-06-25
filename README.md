@@ -26,17 +26,17 @@ We will use a tool called [HTTPie](https://httpie.org/) to help us to run the ap
 
   GET
   ```bash
-  http localhost:3000/api/movies/1
+  http localhost:3000/api/movies/5b316ab22372ef29fb7a2ca0
   ```
 
   PUT
   ```bash
-  http put localhost:3000/api/movies/1 <<< '{ "title": "Friday 13th" }' 
+  http put localhost:3000/api/movies/5b316ab22372ef29fb7a2ca0 <<< '{ "title": "Friday 13th" }' 
   ```
 
   DELETE
   ```bash
-  http delete localhost:3000/api/movies/1
+  http delete localhost:3000/api/movies/5b316ab22372ef29fb7a2ca0
   ```
 
 #### GraphQL
@@ -45,7 +45,7 @@ We will use a tool called [HTTPie](https://httpie.org/) to help us to run the ap
   
   Get a single movie.
   ```bash
-  query getSingleMovie($id: Int!) {
+  query getSingleMovie($id: String!) {
     movie(id: $id) {
       title
       genre
@@ -53,7 +53,7 @@ We will use a tool called [HTTPie](https://httpie.org/) to help us to run the ap
   }
 
   { 
-    "id": 1
+    "id": "5b316ab22372ef29fb7a2ca0"
   }
   ```
 
