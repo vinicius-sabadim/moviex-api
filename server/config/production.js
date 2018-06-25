@@ -1,4 +1,7 @@
 module.exports = {
   graphiql: false,
-  logging: false
+  logging: false,
+  db: {
+    // url: 'mongodb://localhost/moviex'
+  }
 }
