@@ -1,6 +1,5 @@
 const _ = require('lodash')
 
-const logger = require('../../utils/logger')
 const Movie = require('../../models/movie')
 
 exports.param = (req, res, next, id) => {
