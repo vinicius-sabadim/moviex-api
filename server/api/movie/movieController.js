@@ -1,34 +1,41 @@
-const _ = require('lodash')
+import _ from 'lodash'
+import Movie from '../../models/movie'
+import { scrapeMovies } from '../../scrape'
 
-const Movie = require('../../models/movie')
+export const param = (req, res, next, id) => {
+  Movie.findById(id).then(movie => {
+    if (!movie) return next('No movie found with this id')
 
-exports.param = (req, res, next, id) => {
-  Movie.findById(id)
-    .then((movie) => {
-      if (!movie) return next('No movie found with this id')
-      
-      req.movie = movie
-      next()
-    })
+    req.movie = movie
+    next()
+  })
 }
 
-exports.get = (req, res) => {
-  Movie.find({})
-    .then((movies) => res.json(movies))
+export const get = async (req, res) => {
+  const { query } = req
+  if (query.search) {
+  }
+  const movies = await Movie.find({})
+  if (!movies.length) {
+    const imdbMovies = await scrapeMovies(query.search)
+    res.json(imdbMovies)
+  } else {
+    res.json(movies)
+  }
 }
 
-exports.post = (req, res, next) => {
+export const post = (req, res, next) => {
   const newMovie = new Movie(req.body)
 
   newMovie.save((err, movie) => {
-    if(err) return next(err)
+    if (err) return next(err)
     res.json(movie)
   })
 }
 
-exports.getOne = (req, res) => res.json(req.movie)
+export const getOne = (req, res) => res.json(req.movie)
 
-exports.put = (req, res) => {
+export const put = (req, res) => {
   const updatedMovie = _.merge(req.movie, req.body)
 
   updatedMovie.save((err, saved) => {
@@ -37,7 +44,7 @@ exports.put = (req, res) => {
   })
 }
 
-exports.delete = (req, res) => {
+export const deleteMovie = (req, res) => {
   req.movie.remove((err, removed) => {
     if (err) return next(err)
     res.json(removed)

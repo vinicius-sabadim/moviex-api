@@ -4,13 +4,15 @@ const controller = require('./movieController')
 
 router.param('id', controller.param)
 
-router.route('/')
+router
+  .route('/')
   .get(controller.get)
   .post(controller.post)
 
-router.route('/:id')
+router
+  .route('/:id')
   .get(controller.getOne)
   .put(controller.put)
-  .delete(controller.delete)
+  .delete(controller.deleteMovie)
 
 module.exports = router
