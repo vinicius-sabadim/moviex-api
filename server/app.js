@@ -1,6 +1,10 @@
-const express = require('express')
-const config = require('./config')
+import express from 'express'
+import cors from 'cors'
+
+import config from './config'
+
 const app = express()
+app.use(cors())
 
 require('mongoose').connect(config.db.url)
 require('./middleware/appMiddleware')(app)

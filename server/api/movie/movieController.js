@@ -13,9 +13,13 @@ export const param = (req, res, next, id) => {
 
 export const get = async (req, res) => {
   const { query } = req
-  if (query.search) {
+
+  if (!query.search) {
+    return res.json(await Movie.find({}))
   }
-  const movies = await Movie.find({})
+
+  const movies = await Movie.find({ title: query.search.replace('+', ' ') })
+
   if (!movies.length) {
     const imdbMovies = await scrapeMovies(query.search)
     res.json(imdbMovies)
