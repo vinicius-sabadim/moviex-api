@@ -2,12 +2,11 @@ import axios from 'axios'
 import cheerio from 'cheerio'
 import he from 'he'
 
-export async function scrapeMovie(term) {
+export async function scrapeMovies(term) {
   const title = term.replace(' ', '+')
   const url = `https://www.imdb.com/search/title?title=${title}&title_type=feature&has=alternate-versions`
   const html = await getHTML(url)
-  const movies = await getMovieDetails(html)
-  return movies
+  return await getMoviesDetails(html)
 }
 
 async function getHTML(url) {
@@ -19,7 +18,7 @@ async function getHTML(url) {
   return html
 }
 
-async function getMovieDetails(html) {
+async function getMoviesDetails(html) {
   const movies = []
   const $ = cheerio.load(html)
 
@@ -47,30 +46,30 @@ async function getMovieDetails(html) {
     movies.push({
       synopsis: he.decode(synopsis),
       title: he.decode(title),
-      url,
+      url: `https://imdb.com${url}`,
       year
     })
   })
 
-  const newMovies = await printFiles(movies)
-  console.log(newMovies)
-  return movies
+  return await getMoviesPoster(movies)
 }
 
-async function printFiles(movies) {
-  return await movies.reduce(async (promise, movie) => {
-    await promise
-    const html = await getHTML(`https://www.imdb.com${movie.url}`)
-    const image = await getPoster(html)
-    return (movie = {
+async function getMoviesPoster(movies) {
+  const moviesWithPoster = []
+
+  for await (const movie of movies) {
+    const html = await getHTML(movie.url)
+    const poster = await getPoster(html)
+    moviesWithPoster.push({
       ...movie,
-      image
+      poster
     })
-  }, Promise.resolve())
+  }
+
+  return moviesWithPoster.map(({ url, ...movie }) => ({ ...movie }))
 }
 
 async function getPoster(html) {
   const $ = cheerio.load(html)
-  const image = await $('.poster a img').attr('src')
-  return image
+  return await $('.poster a img').attr('src')
 }
