@@ -18,7 +18,10 @@ export const get = async (req, res) => {
     return res.json(await Movie.find({}))
   }
 
-  const movies = await Movie.find({ title: query.search.replace('+', ' ') })
+  const search = query.search.replace('+', '')
+  const movies = await Movie.find({
+    title: { $regex: search, $options: 'i' }
+  })
 
   if (!movies.length) {
     const imdbMovies = await scrapeMovies(query.search)

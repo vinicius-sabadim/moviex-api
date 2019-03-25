@@ -14,7 +14,7 @@ const MovieSchema = new Schema({
   duration: {
     type: String
   },
-  image: {
+  poster: {
     type: String
   },
   synopsis: {
