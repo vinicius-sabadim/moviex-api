@@ -9,6 +9,18 @@ const MovieSchema = new Schema({
     unique: true
   },
   genre: {
+    type: [String]
+  },
+  duration: {
+    type: String
+  },
+  image: {
+    type: String
+  },
+  synopsis: {
+    type: String
+  },
+  year: {
     type: String
   }
 })

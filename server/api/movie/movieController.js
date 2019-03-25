@@ -22,6 +22,7 @@ export const get = async (req, res) => {
 
   if (!movies.length) {
     const imdbMovies = await scrapeMovies(query.search)
+    Movie.insertMany(imdbMovies)
     res.json(imdbMovies)
   } else {
     res.json(movies)
