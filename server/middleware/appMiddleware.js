@@ -1,6 +1,6 @@
-const bodyParser = require('body-parser')
+import bodyParser from 'body-parser'
 
-module.exports = (app) => {
+export default app => {
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
 }
