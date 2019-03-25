@@ -1,4 +1,4 @@
-const { buildSchema } = require('graphql')
+import { buildSchema } from 'graphql'
 
 const schema = buildSchema(`
   type Query {
@@ -12,4 +12,4 @@ const schema = buildSchema(`
   }
 `)
 
-module.exports = schema
+export default schema

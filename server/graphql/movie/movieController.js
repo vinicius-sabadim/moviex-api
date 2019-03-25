@@ -1,18 +1,18 @@
-const Movie = require('../../models/movie')
+import Movie from '../../models/movie'
 
-const getMovie = (args) => {
+const getMovie = args => {
   const { id } = args
-  return Movie.findById(id).then((movie) => movie)
+  return Movie.findById(id).then(movie => movie)
 }
 
-const getMovies = (args) => {
+const getMovies = args => {
   let filter = {}
   if (args.genre) filter = Object.assign(filter, { genre: args.genre })
 
-  return Movie.find(filter).then((movies) => movies)
+  return Movie.find(filter).then(movies => movies)
 }
 
-module.exports = {
+export default {
   movie: getMovie,
   movies: getMovies
 }

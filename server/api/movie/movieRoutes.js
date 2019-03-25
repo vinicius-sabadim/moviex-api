@@ -1,6 +1,7 @@
-const router = require('express').Router()
+import { Router } from 'express'
+import * as controller from './movieController'
 
-const controller = require('./movieController')
+const router = Router()
 
 router.param('id', controller.param)
 
@@ -15,4 +16,4 @@ router
   .put(controller.put)
   .delete(controller.deleteMovie)
 
-module.exports = router
+export default router

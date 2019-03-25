@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+import api from './api'
+import graphql from './graphql'
 import config from './config'
 import appMiddleware from './middleware/appMiddleware'
 
@@ -11,9 +13,6 @@ appMiddleware(app)
 
 mongoose.connect(config.db.url)
 mongoose.set('useCreateIndex', true)
-
-const api = require('./api')
-const graphql = require('./graphql')
 
 app.use('/api', api)
 app.use('/graphql', graphql)

@@ -1,4 +1,4 @@
-const _ = require('lodash')
+import _ from 'lodash'
 
 const config = {
   dev: 'development',
@@ -12,10 +12,10 @@ config.env = process.env.NODE_ENV
 
 let envConfig
 try {
-  envConfig = require(`./${ config.env }`)
+  envConfig = require(`./${config.env}`)
   envConfig = envConfig || {}
 } catch (error) {
   envConfig = {}
 }
 
-module.exports = _.merge(config, envConfig)
+export default _.merge(config, envConfig)

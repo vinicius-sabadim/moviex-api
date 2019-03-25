@@ -1,8 +1,10 @@
-const express_graphql = require('express-graphql')
-const schema = require('./movie/movieSchema')
-const root = require('./movie/movieController')
-const config = require('../config')
+import express_graphql from 'express-graphql'
+import schema from './movie/movieSchema'
+import root from './movie/movieController'
+import config from '../config'
 
-module.exports = express_graphql({
-  schema, rootValue: root, graphiql: config.graphiql
+export default express_graphql({
+  schema,
+  rootValue: root,
+  graphiql: config.graphiql
 })

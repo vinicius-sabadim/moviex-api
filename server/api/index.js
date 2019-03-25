@@ -1,5 +1,7 @@
-const router = require('express').Router()
+import { Router } from 'express'
+import movieRoutes from './movie/movieRoutes'
 
-router.use('/movies', require('./movie/movieRoutes'))
+const router = Router()
+router.use('/movies', movieRoutes)
 
-module.exports = router
+export default router
