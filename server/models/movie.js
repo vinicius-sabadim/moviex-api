@@ -5,8 +5,7 @@ const Schema = mongoose.Schema
 const MovieSchema = new Schema({
   title: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   genre: {
     type: [String]
@@ -15,13 +14,15 @@ const MovieSchema = new Schema({
     type: String
   },
   poster: {
-    type: String
+    type: String,
+    required: true
   },
   synopsis: {
     type: String
   },
   year: {
-    type: String
+    type: String,
+    required: true
   }
 })
 

@@ -36,13 +36,17 @@ async function getMoviesDetails(html) {
       .html()
       .replace('(', '')
       .replace(')', '')
+    if (!year) return
 
     const info = $(this)
       .find('.lister-item-content .lister-item-header')
       .next()
       .text()
       .trim()
+    if (!info) return
+
     const [_, duration, genre] = info.split('|')
+    if (!genre) return
 
     const synopsis = $(this)
       .find('.lister-item-content .ratings-bar')

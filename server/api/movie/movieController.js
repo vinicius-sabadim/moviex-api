@@ -15,17 +15,22 @@ export const get = async (req, res) => {
   const { query } = req
 
   if (!query.search) {
-    return res.json(await Movie.find({}))
+    return res.json(
+      await Movie.find({
+        year: { $ne: '' }
+      }).sort('title')
+    )
   }
 
   const search = query.search.replace('+', '')
   const movies = await Movie.find({
-    title: { $regex: search, $options: 'i' }
-  })
+    title: { $regex: search, $options: 'i' },
+    year: { $ne: null }
+  }).sort('title')
 
   if (!movies.length) {
     const imdbMovies = await scrapeMovies(query.search)
-    Movie.insertMany(imdbMovies)
+    Movie.insertMany(imdbMovies.filter(movie => movie.poster))
     res.json(imdbMovies)
   } else {
     res.json(movies)
