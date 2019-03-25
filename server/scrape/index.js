@@ -37,6 +37,13 @@ async function getMoviesDetails(html) {
       .replace('(', '')
       .replace(')', '')
 
+    const info = $(this)
+      .find('.lister-item-content .lister-item-header')
+      .next()
+      .text()
+      .trim()
+    const [_, duration, genre] = info.split('|')
+
     const synopsis = $(this)
       .find('.lister-item-content .ratings-bar')
       .next()
@@ -44,6 +51,8 @@ async function getMoviesDetails(html) {
       .trim()
 
     movies.push({
+      duration: duration.trim(),
+      genre: genre.split(',').map(item => item.trim()),
       synopsis: he.decode(synopsis),
       title: he.decode(title),
       url: `https://imdb.com${url}`,

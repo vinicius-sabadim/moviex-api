@@ -18,4 +18,4 @@ const graphql = require('./graphql')
 app.use('/api', api)
 app.use('/graphql', graphql)
 
-module.exports = app
+export default app
