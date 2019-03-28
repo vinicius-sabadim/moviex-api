@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Movie from '../../models/movie'
-import { scrapeMovies } from '../../scrape'
+import { scrapeMoviesByTitle } from '../../scrape'
 
 export const param = (req, res, next, id) => {
   Movie.findById(id).then(movie => {
@@ -29,7 +29,7 @@ export const get = async (req, res) => {
   }).sort('title')
 
   if (!movies.length) {
-    const imdbMovies = await scrapeMovies(query.search)
+    const imdbMovies = await scrapeMoviesByTitle(query.search)
     Movie.insertMany(imdbMovies.filter(movie => movie.poster))
     res.json(imdbMovies)
   } else {
