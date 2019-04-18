@@ -1,2 +1,4 @@
 /node_modules
 things.txt
+*.swp
+*.swo

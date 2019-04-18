@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import * as controller from './movieController'
+import auth from '../auth'
 
 const router = Router()
 
@@ -7,7 +8,7 @@ router.param('id', controller.param)
 
 router
   .route('/')
-  .get(controller.get)
+  .get(auth.required, controller.get)
   .post(controller.post)
 
 router
