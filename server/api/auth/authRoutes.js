@@ -29,6 +29,6 @@ const auth = {
 
 const router = Router()
 
-router.post('/login', auth.optional, controller.post)
+router.post('/signup', auth.optional, controller.post)
 
 export default router
