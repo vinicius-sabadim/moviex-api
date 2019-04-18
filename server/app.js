@@ -7,22 +7,28 @@ import bodyParser from 'body-parser'
 import api from './api'
 import graphql from './graphql'
 import config from './config'
-import appMiddleware from './middleware/appMiddleware'
 import * as strategies from './passport'
 
 const app = express()
 app.use(cors())
-appMiddleware(app)
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 mongoose.connect(config.db.url)
 mongoose.set('useCreateIndex', true)
 
 passport.use(strategies.local)
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
 app.use('/api', api)
 app.use('/graphql', graphql)
+
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.'
+    })
+  }
+})
 
 export default app

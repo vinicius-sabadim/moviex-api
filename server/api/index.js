@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import authRoutes from './auth/authRoutes'
+import userRoutes from './user/userRoutes'
 import movieRoutes from './movie/movieRoutes'
 
 const router = Router()
-router.use('/auth', authRoutes)
+router.use('/user', userRoutes)
 router.use('/movies', movieRoutes)
 
 export default router

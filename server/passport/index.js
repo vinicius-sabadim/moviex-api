@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import LocalStrategy from 'passport-local'
 
 const User = mongoose.model('user')
+
 export const local = new LocalStrategy(
   {
     usernameField: 'user[email]',

@@ -1,5 +1,3 @@
-import { Router } from 'express'
-import * as controller from './authController'
 import jwt from 'express-jwt'
 
 const getTokenFromHeaders = req => {
@@ -27,8 +25,4 @@ const auth = {
   })
 }
 
-const router = Router()
-
-router.post('/signup', auth.optional, controller.post)
-
-export default router
+export default auth
