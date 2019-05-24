@@ -13,7 +13,7 @@ export const local = new LocalStrategy(
       .then(user => {
         if (!user || !user.validatePassword(password)) {
           return done(null, false, {
-            errors: { 'email or password': 'is invalid' }
+            errors: ['email or password is invalid']
           })
         }
 
