@@ -7,6 +7,10 @@ const MovieSchema = new Schema({
     type: String,
     required: true
   },
+  identifier: {
+    type: String,
+    unique: true
+  },
   genre: {
     type: [String]
   },

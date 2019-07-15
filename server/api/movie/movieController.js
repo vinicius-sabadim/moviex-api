@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Movie from '../../models/movie'
-import { scrapeMoviesByTitle } from '../../scrape'
+import { scrapeMoviesByTitle, saveOnDatabase } from '../../scrape'
 
 export const param = (req, res, next, id) => {
   Movie.findById(id).then(movie => {
@@ -30,7 +30,7 @@ export const get = async (req, res) => {
 
   if (!movies.length) {
     const imdbMovies = await scrapeMoviesByTitle(query.search)
-    Movie.insertMany(imdbMovies.filter(movie => movie.poster))
+    await saveOnDatabase(imdbMovies)
     res.json(imdbMovies)
   } else {
     res.json(movies)

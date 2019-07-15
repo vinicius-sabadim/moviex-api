@@ -49,16 +49,22 @@ export async function getMoviesDetails(html) {
       .text()
       .trim()
 
+    const decodedTitle = he.decode(title)
+    const identifier = `${decodedTitle}-${duration.trim()}-${year}`.replace(
+      /\s/g,
+      '-'
+    )
+
     movies.push({
+      identifier,
       duration: duration.trim(),
       genre: genre.split(',').map(item => item.trim()),
       synopsis: he.decode(synopsis),
-      title: he.decode(title),
+      title: decodedTitle,
       url: `https://imdb.com${url}`,
       year
     })
   })
-
   return await getMoviesPoster(movies)
 }
 
