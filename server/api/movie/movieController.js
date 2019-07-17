@@ -63,3 +63,16 @@ export const deleteMovie = (req, res) => {
     res.json(removed)
   })
 }
+
+export const getMoviesByGenre = async (req, res) => {
+  const { genre } = req.params
+
+  const movies = await Movie.find({
+    genre: {
+      $regex: genre,
+      $options: 'i'
+    }
+  }).sort('title')
+
+  res.json(movies)
+}

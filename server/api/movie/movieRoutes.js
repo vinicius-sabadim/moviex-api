@@ -17,4 +17,6 @@ router
   .put(controller.put)
   .delete(controller.deleteMovie)
 
+router.route('/genres/:genre').get(controller.getMoviesByGenre)
+
 export default router
