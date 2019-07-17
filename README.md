@@ -2,6 +2,14 @@
 
 > API for the MovieX project.
 
+### Seed
+
+To start a database with data:
+
+```
+npm run seed
+```
+
 ### Tasks
 
 - Scrape by top movies on IMDB.

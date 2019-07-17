@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon -r esm index.js",
     "scrape:top": "node -r esm ./server/scrape/top.js",
+    "seed": "node -r esm ./server/seed.js",
     "start": "node index.js"
   },
   "keywords": [],
