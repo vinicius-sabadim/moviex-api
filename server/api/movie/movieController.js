@@ -1,4 +1,5 @@
 import _ from 'lodash'
+
 import Movie from '../../models/movie'
 import { scrapeMoviesByTitle, saveOnDatabase } from '../../scrape'
 
@@ -18,7 +19,9 @@ export const get = async (req, res) => {
     return res.json(
       await Movie.find({
         year: { $ne: '' }
-      }).sort('title')
+      })
+        .populate('genre')
+        .sort('title')
     )
   }
 
@@ -26,7 +29,9 @@ export const get = async (req, res) => {
   const movies = await Movie.find({
     title: { $regex: search, $options: 'i' },
     year: { $ne: null }
-  }).sort('title')
+  })
+    .populate('genre')
+    .sort('title')
 
   if (!movies.length) {
     const imdbMovies = await scrapeMoviesByTitle(query.search)
