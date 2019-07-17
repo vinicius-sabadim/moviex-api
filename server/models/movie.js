@@ -11,9 +11,12 @@ const MovieSchema = new Schema({
     type: String,
     unique: true
   },
-  genre: {
-    type: [String]
-  },
+  genre: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'genre'
+    }
+  ],
   duration: {
     type: String
   },

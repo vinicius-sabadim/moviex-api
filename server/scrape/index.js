@@ -1,4 +1,5 @@
 import logger from '../utils/logger'
+import Genre from '../models/genre'
 import Movie from '../models/movie'
 
 import { getHTML, getMoviesDetails } from './utils'
@@ -17,13 +18,25 @@ export async function scrapeMoviesByTitle(term) {
 }
 
 export async function saveOnDatabase(movies) {
-  return await movies
+  const genres = await Genre.find()
+
+  const moviesWithPoster = movies
     .filter(movie => movie.poster)
-    .forEach(async movie => {
-      try {
-        await Movie.create(movie)
-      } catch (err) {
-        logger.error(err.message)
-      }
-    })
+    .map(movie => ({
+      ...movie,
+      genre: movie.genre.map(genre => getGenreObject(genres, genre))
+    }))
+
+  for (const movie of moviesWithPoster) {
+    try {
+      await Movie.create(movie)
+      logger.log(`Saved the movie - ${movie.title}`)
+    } catch (err) {
+      logger.error(err.message)
+    }
+  }
+}
+
+const getGenreObject = (genres, name) => {
+  return genres.find(genre => genre.name === name)
 }
