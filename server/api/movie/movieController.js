@@ -1,6 +1,7 @@
 import _ from 'lodash'
 
 import Movie from '../../models/movie'
+
 import { scrapeMoviesByTitle, saveOnDatabase } from '../../scrape'
 
 export const param = (req, res, next, id) => {
