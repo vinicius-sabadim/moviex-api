@@ -8,7 +8,7 @@ router.param('id', controller.param)
 
 router
   .route('/')
-  .get(auth.required, controller.get)
+  .get(controller.get)
   .post(controller.post)
 
 router
